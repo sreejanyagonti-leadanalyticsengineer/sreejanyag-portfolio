@@ -153,6 +153,22 @@ h1.hero-name strong{font-weight:500;color:#fff}
 }
 .s-intro{font-size:15px;color:var(--text2);max-width:560px;line-height:1.8;margin-bottom:2.5rem}
 
+.flow-grid{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;
+}
+.flow-step{
+  background:var(--navy2);border:1px solid var(--border);border-radius:14px;
+  padding:1.75rem;transition:transform .2s,box-shadow .2s;
+}
+.flow-step:hover{transform:translateY(-4px);box-shadow:0 18px 50px rgba(0,0,0,.18)}
+.step-num{font-family:var(--mono);font-size:13px;color:var(--blue);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.85rem}
+.step-title{font-size:16px;font-weight:500;color:var(--text);margin-bottom:.75rem}
+.step-desc{font-size:13px;color:var(--text2);line-height:1.75}
+
+@media(max-width:900px){
+  .flow-grid{grid-template-columns:1fr;}
+}
+
 /*────────────────────────────────────────
   IMPACT NUMBERS
 ────────────────────────────────────────*/
@@ -436,6 +452,7 @@ footer{
     <li><a href="#experience">Experience</a></li>
     <li><a href="#ai">AI Work</a></li>
     <li><a href="#architecture">Architecture</a></li>
+    <li><a href="#teamflow">Team Flow</a></li>
     <li><a href="#teaching">Teaching</a></li>
     <li><a href="#philosophy">Philosophy</a></li>
     <li><a href="#contact" class="nav-cta">Contact</a></li>
@@ -449,7 +466,7 @@ footer{
     <p class="hero-eyebrow">Data Analytics Engineer · Team Lead</p>
     <h1 class="hero-name"><strong>Sreejanya</strong><br>Gonti</h1>
     <p class="hero-title">Lead Data Analytics Engineer &amp; Team Lead · Apex, NC</p>
-    <p class="hero-desc">I build the data infrastructure that makes planning, inventory, and finance teams move with confidence — and the AI layers that answer their questions before they have to ask.</p>
+    <p class="hero-desc">From cloud migrations to AI-powered analytics agents — I've spent 7+ years making enterprise data faster, cleaner, and smarter. I don't just build pipelines — I build the analytics intelligence layer that tells 120+ stakeholders what's happening, why it happened, and what to do next. Because when the numbers matter, the trust layer underneath has to be bulletproof. Now I lead the team that makes all of it happen at scale.</p>
     <div class="hero-stats">
       <div class="hstat"><span class="hstat-n">7+</span><span class="hstat-l">Years</span></div>
       <div class="hstat"><span class="hstat-n">200+</span><span class="hstat-l">Snowflake Assets</span></div>
@@ -668,6 +685,57 @@ footer{
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ TEAM FLOW ═════════════════════════ -->
+<section class="section" id="teamflow">
+  <div class="section-inner">
+    <p class="s-eyebrow">Team Leadership</p>
+    <h2 class="s-title reveal">How I run the delivery process</h2>
+    <p class="s-intro reveal">A structured team workflow from sprint planning through deployment, with clear priorities, review checkpoints, and stakeholder communication built in.</p>
+    <div class="flow-grid reveal">
+      <div class="flow-step">
+        <div class="step-num">01</div>
+        <div class="step-title">Sprint Planning</div>
+        <div class="step-desc">Set goals, align with stakeholders, define outcomes, and break work into clear delivery increments.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">02</div>
+        <div class="step-title">Create Tickets</div>
+        <div class="step-desc">Translate outcomes into well-scoped Jira stories with acceptance criteria, data contracts, and validation checks.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">03</div>
+        <div class="step-title">Assign & Prioritize</div>
+        <div class="step-desc">Allocate work by skill, urgency, and impact while balancing team capacity and dependency risk.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">04</div>
+        <div class="step-title">Technical Templates</div>
+        <div class="step-desc">Use templates for model design, SQL patterns, testing, and data validation so every engineer ships consistent production code.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">05</div>
+        <div class="step-title">Development</div>
+        <div class="step-desc">Build with repeatable patterns, reusable semantic models, and frequent reviews to keep code quality high.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">06</div>
+        <div class="step-title">Review & Validate</div>
+        <div class="step-desc">Perform peer reviews, automated tests, and data validation checks before moving to release readiness.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">07</div>
+        <div class="step-title">Deploy to Prod</div>
+        <div class="step-desc">Coordinate releases with deploy pipelines, monitor rollouts, and ensure production readiness with rollback support.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">08</div>
+        <div class="step-title">Stakeholder Communication</div>
+        <div class="step-desc">Share status, risks, and outcomes clearly so business users trust the data and know when to act.</div>
+      </div>
     </div>
   </div>
 </section>

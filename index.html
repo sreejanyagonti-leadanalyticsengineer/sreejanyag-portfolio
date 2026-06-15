@@ -245,9 +245,8 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;jus
     <h1 class="hero-name"><strong>Sreejanya</strong><br>Gonti</h1>
     <p class="hero-tagline-italic">When the numbers matter, my pipelines deliver them.</p>
     <p class="hero-tagline-story">
-      From cloud migrations to AI-powered analytics agents — I've spent 6 years making enterprise data faster, cleaner, and smarter.
-      I don't just build pipelines — I build the <em>analytics intelligence layer</em> that tells stakeholders what's happening, why it happened, and what to do next.
-      Because when the numbers matter, the trust layer underneath has to be bulletproof.
+      From cloud migrations to AI-powered analytics agents — I've spent my experience making enterprise data faster, cleaner, and smarter.
+      in story telling stakeholders what's happening, why it happened, and what to do next.
       Now I lead the team that makes all of it happen at scale.
     </p>
     <div class="hero-stats">
@@ -613,6 +612,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;jus
     {id:'src2',x:50,y:110,label:'Oracle',sub:'db',color:'#4a90f5'},
     {id:'src3',x:50,y:160,label:'Semi-struct',sub:'CSV/XML',color:'#4a90f5'},
     {id:'src4',x:50,y:210,label:'Marketplace',sub:'amazon/tiktok',color:'#4a90f5'},
+    {id:'src5',x:50,y:210,label:'API',sub:'facebook/instagram',color:'#4a90f5'},
     {id:'air',x:140,y:135,label:'Airflow',sub:'orchestrate',color:'#2dd4bf'},
     {id:'sf',x:240,y:135,label:'Snowflake',sub:'warehouse',color:'#6aabff',big:true},
     {id:'sfm',x:240,y:200,label:'Fact/Dims',sub:'marts',color:'#6aabff'},
@@ -631,13 +631,13 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;jus
   ];
   const edges=[
     ['gh','air'],['gh','mat'],
-    ['src1','air'],['src2','air'],['src4','air'],
-    ['air','sf'],['sf','sfm'],['sf','dbt'],['sf','py'],
+    ['src1','air'],['src2','air'],['src4','air'],['src5','air'],['src3','air']
+    ['air','sf'],['sf','sfm'],['sf','dbt'],['sf','py'],['sf','sem']
     ['dbt','sem'],['sem','tab'],['sem','ai'],['py','tab'],
-    ['src3','mat'],['src3','adf'],
+    ['src3','mat'],['src3','adf'],['src5','air']
     ['mat','sf'],['mat','tab'],
     ['adf','adls'],['adls','adb'],['adb','asql'],
-    ['adf','ado'],['adb','ado'],
+    ['adf','ado'],['adb','ado']
   ];
   const particles=[];
   edges.forEach(([from,to],i)=>{

@@ -924,54 +924,109 @@ footer{
 </footer>
 
 <script>
-/* ────────────────────────────────────────────
-   PIPELINE CANVAS — animated data flow
-───────────────────────────────────────────── */
 (function(){
   const canvas=document.getElementById('pipeline-canvas');
   if(!canvas)return;
+  const dpr=window.devicePixelRatio||1;
+  const W=640,H=460;
+  canvas.width=W*dpr;canvas.height=H*dpr;
+  canvas.style.width=W+'px';canvas.style.height=H+'px';
   const ctx=canvas.getContext('2d');
-  const W=canvas.width,H=canvas.height;
+  ctx.scale(dpr,dpr);
+
+  const BL='#4a90f5',B2='#6aabff',TL='#2dd4bf',
+        GD='#f0b429',GR='#22c55e',AZ='#3b9eff',PU='#a78bfa',
+        T2='#8ba4c4',T3='#344d64';
+
+  /* ── EXACT POSITIONS FROM SCREENSHOT ──────────────
+     Col 1 (sources):  x≈80
+     Col 2 (Github):   x≈178
+     Col 3 (Airflow):  x≈245
+     Col 4 (Snowflake):x≈358
+     Col 5 (DBT/Sem/Py):x≈468
+     Col 6 (Tableau/AI):x≈558
+     Azure row:        y≈400, x: 105,210,318,426,534
+  */
   const nodes=[
-    {id:'src1',x:50,y:60,label:'SQL Server',sub:'relational',color:'#4a90f5'},
-    {id:'src2',x:50,y:110,label:'Oracle',sub:'db',color:'#4a90f5'},
-    {id:'src3',x:50,y:160,label:'Semi-struct',sub:'CSV/XML',color:'#4a90f5'},
-    {id:'src4',x:50,y:210,label:'Marketplace',sub:'amazon/tiktok',color:'#4a90f5'},
-    {id:'src5',x:50,y:210,label:'API',sub:'facebook/instagram',color:'#4a90f5'},
-    {id:'air',x:140,y:135,label:'Airflow',sub:'orchestrate',color:'#2dd4bf'},
-    {id:'sf',x:240,y:135,label:'Snowflake',sub:'warehouse',color:'#6aabff',big:true},
-    {id:'sfm',x:240,y:200,label:'Fact/Dims',sub:'marts',color:'#6aabff'},
-    {id:'dbt',x:340,y:90,label:'DBT',sub:'transforms',color:'#2dd4bf'},
-    {id:'sem',x:340,y:135,label:'Semantic',sub:'models',color:'#2dd4bf'},
-    {id:'py',x:340,y:180,label:'Python',sub:'validate',color:'#2dd4bf'},
-    {id:'tab',x:440,y:100,label:'Tableau',sub:'BI',color:'#6aabff'},
-    {id:'ai',x:440,y:150,label:'AI Agent',sub:'intelligence',color:'#f0b429'},
-    {id:'gh',x:140,y:70,label:'Github',sub:'code',color:'#f0ad4e'},
-    {id:'mat',x:140,y:280,label:'Matillion',sub:'ELT',color:'#2dd4bf'},
-    {id:'adf',x:140,y:340,label:'ADF',sub:'orchestrate',color:'#0078d4'},
-    {id:'adls',x:240,y:340,label:'Data Lake',sub:'storage',color:'#0078d4'},
-    {id:'adb',x:340,y:340,label:'Databricks',sub:'compute',color:'#0078d4'},
-    {id:'asql',x:440,y:340,label:'Azure SQL',sub:'database',color:'#0078d4'},
-    {id:'ado',x:540,y:340,label:'DevOps',sub:'pipelines',color:'#0078d4'},
+    // ── SOURCES col 1 ──
+    {id:'sql', x:80,  y:52,  label:'SQL Server', sub:'relational',   color:BL, r:28},
+    {id:'ora', x:80,  y:128, label:'Oracle',     sub:'db',           color:BL, r:28},
+    {id:'sem', x:80,  y:204, label:'Semi-struct',sub:'CSV/XML',      color:BL, r:28},
+    {id:'mkt', x:80,  y:280, label:'Marketplace',sub:'amazon/tiktok',color:BL, r:28},
+    {id:'api', x:80,  y:344, label:'APIs',       sub:'3rd party',    color:BL, r:26},
+
+    // ── GITHUB col 2 ──
+    {id:'gh',  x:178, y:52,  label:'Github',     sub:'code',         color:GD, r:28},
+
+    // ── AIRFLOW col 3 ──
+    {id:'air', x:245, y:128, label:'Airflow',    sub:'orchestrate',  color:TL, r:32},
+
+    // ── SNOWFLAKE centre ──
+    {id:'sf',  x:358, y:170, label:'Snowflake',  sub:'warehouse',    color:B2, r:44, big:true},
+
+    // ── FACT/DIMS below Snowflake ──
+    {id:'fdm', x:280, y:258, label:'Fact/Dims',  sub:'marts',        color:B2, r:28},
+
+    // ── MATILLION col 3 bottom ──
+    {id:'mat', x:178, y:310, label:'Matillion',  sub:'ELT',          color:GR, r:28},
+
+    // ── TRANSFORM col 5 ──
+    {id:'dbt', x:468, y:72,  label:'DBT',        sub:'transforms',   color:TL, r:28},
+    {id:'sml', x:468, y:162, label:'Semantic',   sub:'models',       color:TL, r:28},
+    {id:'py',  x:468, y:252, label:'Python',     sub:'validate',     color:TL, r:28},
+
+    // ── CONSUME col 6 ──
+    {id:'tab', x:558, y:72,  label:'Tableau',    sub:'BI',           color:B2, r:28},
+    {id:'ai',  x:558, y:162, label:'AI Agent',   sub:'intelligence', color:GD, r:30},
+
+    // ── AZURE ROW bottom ──
+    {id:'adf', x:105, y:408, label:'ADF',        sub:'orchestrate',  color:AZ, r:26},
+    {id:'adl', x:213, y:408, label:'Data Lake',  sub:'storage',      color:AZ, r:26},
+    {id:'adb', x:321, y:408, label:'Databricks', sub:'compute',      color:AZ, r:26},
+    {id:'ml',  x:429, y:408, label:'ML Models',  sub:'azure ml',     color:PU, r:26},
+    {id:'asq', x:537, y:408, label:'Azure SQL',  sub:'database',     color:AZ, r:26}
   ];
+
   const edges=[
-    ['gh','air'],['gh','mat'],
-    ['src1','air'],['src2','air'],['src4','air'],['src5','air'],['src3','air'],
-    ['air','sf'],['sf','sfm'],['sf','dbt'],['sf','py'],['sf','sem'],
-    ['dbt','sem'],['sem','tab'],['sem','ai'],['py','tab'],
-    ['src3','mat'],['src3','adf'],['src5','air'],
-    ['mat','sf'],['mat','tab'],
-    ['adf','adls'],['adls','adb'],['adb','asql'],
-    ['adf','ado'],['adb','ado']
+    // sources → airflow
+    {f:'sql',t:'air',c:BL},{f:'gh',t:'air',c:GD},
+    {f:'ora',t:'air',c:BL},
+    // sources → matillion
+    {f:'sem',t:'mat',c:BL},{f:'mkt',t:'mat',c:BL},
+    // APIs → both
+    {f:'api',t:'air',c:BL},{f:'api',t:'mat',c:BL},
+
+    // airflow → snowflake
+    {f:'air',t:'sf',c:TL},
+    // matillion → snowflake
+    {f:'mat',t:'sf',c:GR},
+
+    // snowflake → fact/dims
+    {f:'sf',t:'fdm',c:B2},
+    // snowflake → transform
+    {f:'sf',t:'dbt',c:B2},{f:'sf',t:'sml',c:B2},{f:'sf',t:'py',c:B2},
+
+    // transform → consume
+    {f:'dbt',t:'tab',c:TL},
+    {f:'sml',t:'ai',c:GD},{f:'sml',t:'tab',c:TL},
+    {f:'py',t:'ai',c:GD},
+
+    // azure chain
+    {f:'adf',t:'adl',c:AZ},{f:'adl',t:'adb',c:AZ},
+    {f:'adb',t:'ml', c:PU},{f:'ml', t:'asq',c:AZ},
+    // mat feeds azure
+    {f:'mat',t:'adf',c:GR},
+    // azure feeds snowflake
+    {f:'adb',t:'sf',c:AZ},
   ];
-  const particles=[];
-  edges.forEach(([from,to],i)=>{
-    let pc='#4a90f5';
-    if(from==='mat'||to==='mat')pc='#22c55e';
-    else if(['adf','adls','adb','asql','ado'].includes(from)||['adf','adls','adb','asql','ado'].includes(to))pc='#fbbf24';
-    const count=1+Math.floor(Math.random()*2);
-    for(let j=0;j<count;j++)particles.push({from,to,t:Math.random(),speed:.003+Math.random()*.004,color:pc,size:2.5+Math.random()});
+
+  const parts=[];
+  edges.forEach(e=>{
+    for(let i=0;i<2+Math.floor(Math.random()*2);i++)
+      parts.push({f:e.f,t:e.t,c:e.c,t_:Math.random(),sp:.002+Math.random()*.003,sz:1.9+Math.random()*.8});
   });
+
+
 
   function getNode(id){ return nodes.find(n=>n.id===id) }
 

@@ -949,88 +949,49 @@ footer{
    PIPELINE CANVAS — animated data flow
 ───────────────────────────────────────────── */
 (function(){
-  const canvas = document.getElementById('pipeline-canvas');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const W = canvas.width, H = canvas.height;
-
-  // Node definitions
-  const nodes = [
-    // Primary sources
-    {id:'src1', x:50,  y:60,  label:'SQL Server',    sub:'relational',     color:'#4a90f5'},
-    {id:'src2', x:50,  y:110, label:'Oracle',        sub:'db',             color:'#4a90f5'},
-    {id:'src3', x:50,  y:160, label:'Semi-struct',   sub:'CSV/XML',        color:'#4a90f5'},
-    {id:'src4', x:50,  y:210, label:'Marketplace',   sub:'amazon/tiktok',  color:'#4a90f5'},
-
-    // Orchestration
-    {id:'air',  x:140, y:135, label:'Airflow',       sub:'orchestrate',    color:'#2dd4bf'},
-
-    // Main warehouse
-    {id:'sf',   x:240, y:135, label:'Snowflake',     sub:'warehouse',      color:'#6aabff', big:true},
-    {id:'sfm',  x:240, y:200, label:'Fact/Dims',     sub:'marts',          color:'#6aabff'},
-
-    // Transformation & validation
-    {id:'dbt',  x:340, y:90,  label:'DBT',           sub:'transforms',     color:'#2dd4bf'},
-    {id:'sem',  x:340, y:135, label:'Semantic',      sub:'models',         color:'#2dd4bf'},
-    {id:'py',   x:340, y:180, label:'Python',        sub:'validate',       color:'#2dd4bf'},
-
-    // BI & AI outputs
-    {id:'tab',  x:440, y:100, label:'Tableau',       sub:'BI',             color:'#6aabff'},
-    {id:'ai',   x:440, y:150, label:'AI Agent',      sub:'intelligence',   color:'#f0b429'},
-
-    // Delivery & collaboration
-    {id:'gh',   x:140, y:70,  label:'Github',        sub:'code',           color:'#f0ad4e'},
-
-    // Matillion path
-    {id:'mat',  x:140, y:280, label:'Matillion',     sub:'ELT',            color:'#2dd4bf'},
-
-    // Azure path
-    {id:'adf',   x:140, y:340, label:'ADF',          sub:'orchestrate',    color:'#0078d4'},
-    {id:'adls',  x:240, y:340, label:'Data Lake',    sub:'storage',        color:'#0078d4'},
-    {id:'adb',   x:340, y:340, label:'Databricks',   sub:'compute',        color:'#0078d4'},
-    {id:'asql',  x:440, y:340, label:'Azure SQL',    sub:'database',       color:'#0078d4'},
-    {id:'ado',   x:540, y:340, label:'DevOps',       sub:'pipelines',      color:'#0078d4'},
+  const canvas=document.getElementById('pipeline-canvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width,H=canvas.height;
+  const nodes=[
+    {id:'src1',x:50,y:60,label:'SQL Server',sub:'relational',color:'#4a90f5'},
+    {id:'src2',x:50,y:110,label:'Oracle',sub:'db',color:'#4a90f5'},
+    {id:'src3',x:50,y:160,label:'Semi-struct',sub:'CSV/XML',color:'#4a90f5'},
+    {id:'src4',x:50,y:210,label:'Marketplace',sub:'amazon/tiktok',color:'#4a90f5'},
+    {id:'src5',x:50,y:210,label:'API',sub:'facebook/instagram',color:'#4a90f5'},
+    {id:'air',x:140,y:135,label:'Airflow',sub:'orchestrate',color:'#2dd4bf'},
+    {id:'sf',x:240,y:135,label:'Snowflake',sub:'warehouse',color:'#6aabff',big:true},
+    {id:'sfm',x:240,y:200,label:'Fact/Dims',sub:'marts',color:'#6aabff'},
+    {id:'dbt',x:340,y:90,label:'DBT',sub:'transforms',color:'#2dd4bf'},
+    {id:'sem',x:340,y:135,label:'Semantic',sub:'models',color:'#2dd4bf'},
+    {id:'py',x:340,y:180,label:'Python',sub:'validate',color:'#2dd4bf'},
+    {id:'tab',x:440,y:100,label:'Tableau',sub:'BI',color:'#6aabff'},
+    {id:'ai',x:440,y:150,label:'AI Agent',sub:'intelligence',color:'#f0b429'},
+    {id:'gh',x:140,y:70,label:'Github',sub:'code',color:'#f0ad4e'},
+    {id:'mat',x:140,y:280,label:'Matillion',sub:'ELT',color:'#2dd4bf'},
+    {id:'adf',x:140,y:340,label:'ADF',sub:'orchestrate',color:'#0078d4'},
+    {id:'adls',x:240,y:340,label:'Data Lake',sub:'storage',color:'#0078d4'},
+    {id:'adb',x:340,y:340,label:'Databricks',sub:'compute',color:'#0078d4'},
+    {id:'asql',x:440,y:340,label:'Azure SQL',sub:'database',color:'#0078d4'},
+    {id:'ado',x:540,y:340,label:'DevOps',sub:'pipelines',color:'#0078d4'},
   ];
-
-  const edges = [
-    // Delivery
+  const edges=[
     ['gh','air'],['gh','mat'],
-
-    // Main Snowflake path
-    ['src1','air'],['src2','air'],['src4','air'],
-    ['air','sf'],
-    ['sf','sfm'],
-    ['sf','dbt'],['sf','py'],
-    ['dbt','sem'],
-    ['sem','tab'],['sem','ai'],
-    ['py','tab'],
-
-    // Matillion path
-    ['src3','mat'],['src3','adf'],
+    ['src1','air'],['src2','air'],['src4','air'],['src5','air'],['src3','air']
+    ['air','sf'],['sf','sfm'],['sf','dbt'],['sf','py'],['sf','sem']
+    ['dbt','sem'],['sem','tab'],['sem','ai'],['py','tab'],
+    ['src3','mat'],['src3','adf'],['src5','air']
     ['mat','sf'],['mat','tab'],
-
-    // Azure path
     ['adf','adls'],['adls','adb'],['adb','asql'],
-    ['adf','ado'],['adb','ado'],
+    ['adf','ado'],['adb','ado']
   ];
-
-  // Particles
-  const particles = [];
+  const particles=[];
   edges.forEach(([from,to],i)=>{
-    let pcolor = '#4a90f5';  // default blue
-    if(from==='mat' || to==='mat') pcolor = '#22c55e';  // matillion green
-    else if(['adf','adls','adb','asql','ado'].includes(from) || ['adf','adls','adb','asql','ado'].includes(to)) pcolor = '#fbbf24';  // azure yellow
-    
-    const count = 1 + Math.floor(Math.random()*2);
-    for(let j=0;j<count;j++){
-      particles.push({
-        from, to,
-        t: Math.random(),
-        speed: .003 + Math.random()*.004,
-        color: pcolor,
-        size: 2.5 + Math.random()
-      });
-    }
+    let pc='#4a90f5';
+    if(from==='mat'||to==='mat')pc='#22c55e';
+    else if(['adf','adls','adb','asql','ado'].includes(from)||['adf','adls','adb','asql','ado'].includes(to))pc='#fbbf24';
+    const count=1+Math.floor(Math.random()*2);
+    for(let j=0;j<count;j++)particles.push({from,to,t:Math.random(),speed:.003+Math.random()*.004,color:pc,size:2.5+Math.random()});
   });
 
   function getNode(id){ return nodes.find(n=>n.id===id) }

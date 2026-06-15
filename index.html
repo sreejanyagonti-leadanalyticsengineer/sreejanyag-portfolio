@@ -7,12 +7,25 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
+/*────────────────────────────────────────
+  TOKENS
+────────────────────────────────────────*/
 :root{
-  --navy:#080c14;--navy2:#0d1526;--navy3:#111e35;--slate:#1a2d4a;
-  --border:rgba(100,160,255,.10);--border2:rgba(100,160,255,.20);
-  --blue:#4a90f5;--blue2:#6aabff;--teal:#2dd4bf;--gold:#f0b429;
-  --text:#e2eaf5;--text2:#8ba4c4;--text3:#4d6a8a;
-  --mono:'DM Mono',monospace;--sans:'DM Sans',system-ui,sans-serif;
+  --navy:    #080c14;
+  --navy2:   #0d1526;
+  --navy3:   #111e35;
+  --slate:   #1a2d4a;
+  --border:  rgba(100,160,255,.10);
+  --border2: rgba(100,160,255,.20);
+  --blue:    #4a90f5;
+  --blue2:   #6aabff;
+  --teal:    #2dd4bf;
+  --gold:    #f0b429;
+  --text:    #e2eaf5;
+  --text2:   #8ba4c4;
+  --text3:   #4d6a8a;
+  --mono:    'DM Mono',monospace;
+  --sans:    'DM Sans',system-ui,sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
@@ -21,15 +34,32 @@ a{color:inherit;text-decoration:none}
 img{max-width:100%}
 ::selection{background:rgba(74,144,245,.25);color:#fff}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:60px;background:rgba(8,12,20,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);transition:background .3s}
+/*────────────────────────────────────────
+  NAV
+────────────────────────────────────────*/
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;height:60px;
+  background:rgba(8,12,20,.82);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  transition:background .3s;
+}
 .nav-logo{font-family:var(--mono);font-size:13px;color:var(--blue2);letter-spacing:.06em}
 .nav-links{display:flex;list-style:none;gap:2.25rem}
 .nav-links a{font-size:13px;color:var(--text2);letter-spacing:.01em;transition:color .15s}
 .nav-links a:hover,.nav-links a.active{color:var(--text)}
-.nav-cta{font-size:13px;font-weight:500;color:#fff!important;background:var(--blue);padding:7px 18px;border-radius:6px;transition:opacity .15s!important}
+.nav-cta{
+  font-size:13px;font-weight:500;
+  color:#fff!important;
+  background:var(--blue);
+  padding:7px 18px;border-radius:6px;
+  transition:opacity .15s!important;
+}
 .nav-cta:hover{opacity:.85}
 .nav-burger{display:none;background:none;border:none;cursor:pointer;color:var(--text2);font-size:22px;line-height:1}
+
 @media(max-width:720px){
   .nav-links{display:none;flex-direction:column;position:fixed;top:60px;left:0;right:0;background:var(--navy2);padding:1.5rem 2rem 2rem;gap:1.4rem;border-bottom:1px solid var(--border)}
   .nav-links.open{display:flex}
@@ -37,64 +67,176 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
   nav{padding:0 1.25rem}
 }
 
-/* HERO */
-.hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:7rem 2.5rem 5rem;gap:3rem;max-width:1280px;margin:0 auto}
+/*────────────────────────────────────────
+  HERO
+────────────────────────────────────────*/
+.hero{
+  position:relative;min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;align-items:center;
+  padding:7rem 2.5rem 5rem;gap:3rem;
+  max-width:1280px;margin:0 auto;
+}
 .hero-left{position:relative;z-index:2}
-.hero-eyebrow{font-family:var(--mono);font-size:11px;color:var(--blue);letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.25rem;display:flex;align-items:center;gap:.75rem}
+.hero-eyebrow{
+  font-family:var(--mono);font-size:11px;
+  color:var(--blue);letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:1.25rem;display:flex;align-items:center;gap:.75rem;
+}
 .hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--blue)}
-h1.hero-name{font-size:clamp(42px,5.5vw,72px);font-weight:300;line-height:1.05;letter-spacing:-.03em;color:var(--text);margin-bottom:.25rem}
+h1.hero-name{
+  font-size:clamp(42px,5.5vw,72px);font-weight:300;
+  line-height:1.05;letter-spacing:-.03em;
+  color:var(--text);margin-bottom:.25rem;
+}
 h1.hero-name strong{font-weight:500;color:#fff}
-.hero-tagline-italic{font-size:13px;color:var(--blue2);margin-bottom:1rem;font-style:italic;font-weight:500;font-family:var(--mono);letter-spacing:.02em}
-.hero-tagline-story{font-size:15px;color:var(--text2);line-height:1.85;max-width:500px;margin-bottom:2.5rem}
-.hero-tagline-story em{color:var(--text);font-style:normal;font-weight:500}
-.hero-stats{display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.hero-title{
+  font-size:clamp(16px,1.8vw,20px);font-weight:300;
+  color:var(--text2);margin-bottom:2rem;letter-spacing:-.01em;
+}
+.hero-desc{
+  font-size:15px;color:var(--text2);line-height:1.8;
+  max-width:480px;margin-bottom:2.5rem;
+}
+.hero-stats{
+  display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2.5rem;
+}
 .hstat{display:flex;flex-direction:column}
 .hstat-n{font-family:var(--mono);font-size:26px;color:var(--blue2);line-height:1;font-weight:500}
 .hstat-l{font-size:11px;color:var(--text3);margin-top:4px;letter-spacing:.04em;text-transform:uppercase}
 .hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;padding:11px 24px;border-radius:7px;transition:all .18s;cursor:pointer;border:none}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:500;padding:11px 24px;border-radius:7px;
+  transition:all .18s;cursor:pointer;border:none;
+}
 .btn-primary{background:var(--blue);color:#fff}
 .btn-primary:hover{background:#3a7de8}
-.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border2)}
+.btn-ghost{
+  background:transparent;color:var(--text2);
+  border:1px solid var(--border2);
+}
 .btn-ghost:hover{border-color:var(--blue);color:var(--text)}
 .hero-right{position:relative;z-index:2}
-#pipeline-canvas{width:100%;height:420px;display:block}
-.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:800px;height:800px;background:radial-gradient(circle,rgba(74,144,245,.06) 0%,transparent 65%);pointer-events:none}
-@media(max-width:900px){.hero{grid-template-columns:1fr;min-height:auto;padding-top:8rem}.hero-right{display:none}}
 
-/* SECTION BASE */
+/* ── Pipeline SVG canvas ── */
+#pipeline-canvas{width:100%;height:420px;display:block}
+
+/* hero gradient bg */
+.hero::before{
+  content:'';position:absolute;
+  top:-200px;right:-200px;
+  width:800px;height:800px;
+  background:radial-gradient(circle,rgba(74,144,245,.06) 0%,transparent 65%);
+  pointer-events:none;
+}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;min-height:auto;padding-top:8rem}
+  .hero-right{display:none}
+}
+
+/*────────────────────────────────────────
+  SECTION BASE
+────────────────────────────────────────*/
 .section{padding:6rem 2.5rem}
 .section-inner{max-width:1100px;margin:0 auto}
 .section-alt{background:var(--navy2)}
-.s-eyebrow{font-family:var(--mono);font-size:11px;color:var(--blue);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.75rem}
-.s-title{font-size:clamp(26px,3.5vw,40px);font-weight:400;letter-spacing:-.02em;color:var(--text);margin-bottom:3rem;line-height:1.2}
+.s-eyebrow{
+  font-family:var(--mono);font-size:11px;
+  color:var(--blue);letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:.75rem;
+}
+.s-title{
+  font-size:clamp(26px,3.5vw,40px);font-weight:400;
+  letter-spacing:-.02em;color:var(--text);
+  margin-bottom:3rem;line-height:1.2;
+}
 .s-intro{font-size:15px;color:var(--text2);max-width:560px;line-height:1.8;margin-bottom:2.5rem}
 
-/* IMPACT */
-.impact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.impact-cell{background:var(--navy2);padding:2rem 1.75rem;transition:background .2s}
+.flow-grid{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;
+}
+.flow-step{
+  background:var(--navy2);border:1px solid var(--border);border-radius:14px;
+  padding:1.75rem;transition:transform .2s,box-shadow .2s;
+}
+.flow-step:hover{transform:translateY(-4px);box-shadow:0 18px 50px rgba(0,0,0,.18)}
+.step-num{font-family:var(--mono);font-size:13px;color:var(--blue);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.85rem}
+.step-title{font-size:16px;font-weight:500;color:var(--text);margin-bottom:.75rem}
+.step-desc{font-size:13px;color:var(--text2);line-height:1.75}
+
+@media(max-width:900px){
+  .flow-grid{grid-template-columns:1fr;}
+}
+
+/*────────────────────────────────────────
+  IMPACT NUMBERS
+────────────────────────────────────────*/
+.impact-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;
+}
+.impact-cell{
+  background:var(--navy2);padding:2rem 1.75rem;
+  transition:background .2s;
+}
 .impact-cell:hover{background:var(--navy3)}
-.impact-n{font-family:var(--mono);font-size:38px;font-weight:500;color:var(--blue2);line-height:1;margin-bottom:.5rem;display:flex;align-items:flex-start;gap:2px}
+.impact-n{
+  font-family:var(--mono);font-size:38px;font-weight:500;
+  color:var(--blue2);line-height:1;margin-bottom:.5rem;
+  display:flex;align-items:flex-start;gap:2px;
+}
 .impact-n sup{font-size:18px;margin-top:4px}
 .impact-label{font-size:13px;color:var(--text2);line-height:1.5}
 .impact-sub{font-size:11px;color:var(--text3);margin-top:4px;font-family:var(--mono)}
 
-/* TIMELINE */
+/*────────────────────────────────────────
+  TIMELINE / EXPERIENCE
+────────────────────────────────────────*/
 .timeline{position:relative;padding-left:0}
-.tl-item{display:grid;grid-template-columns:200px 1fr;gap:0 2.5rem;margin-bottom:0;position:relative}
+.tl-item{
+  display:grid;grid-template-columns:200px 1fr;
+  gap:0 2.5rem;margin-bottom:0;
+  position:relative;
+}
 .tl-item+.tl-item{margin-top:0}
-.tl-left{text-align:right;padding-top:1px;padding-bottom:3rem;border-right:1px solid var(--border2);padding-right:2.5rem;position:relative}
-.tl-left::after{content:'';position:absolute;right:-5px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--navy2);border:2px solid var(--border2)}
-.tl-item.current .tl-left::after{background:var(--blue);border-color:var(--blue);box-shadow:0 0 0 4px rgba(74,144,245,.18)}
+.tl-left{
+  text-align:right;padding-top:1px;
+  padding-bottom:3rem;
+  border-right:1px solid var(--border2);
+  padding-right:2.5rem;
+  position:relative;
+}
+.tl-left::after{
+  content:'';position:absolute;right:-5px;top:8px;
+  width:9px;height:9px;border-radius:50%;
+  background:var(--navy2);border:2px solid var(--border2);
+}
+.tl-item.current .tl-left::after{
+  background:var(--blue);border-color:var(--blue);
+  box-shadow:0 0 0 4px rgba(74,144,245,.18);
+}
 .tl-date{font-family:var(--mono);font-size:11px;color:var(--text3);line-height:1.5}
 .tl-right{padding-bottom:3rem;padding-left:.25rem}
 .tl-company{font-size:17px;font-weight:500;color:var(--text);margin-bottom:2px}
 .tl-role{font-size:13px;color:var(--blue2);margin-bottom:.75rem;font-family:var(--mono)}
 .tl-bullets{list-style:none;padding:0}
-.tl-bullets li{font-size:14px;color:var(--text2);line-height:1.7;padding-left:1.1rem;position:relative;margin-bottom:5px}
+.tl-bullets li{
+  font-size:14px;color:var(--text2);line-height:1.7;
+  padding-left:1.1rem;position:relative;margin-bottom:5px;
+}
 .tl-bullets li::before{content:'→';position:absolute;left:0;color:var(--text3);font-size:12px;top:1px}
 .tl-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:.875rem}
-.tl-tags span{font-family:var(--mono);font-size:11px;color:var(--text3);border:1px solid var(--border);border-radius:4px;padding:3px 9px}
+.tl-tags span{
+  font-family:var(--mono);font-size:11px;
+  color:var(--text3);border:1px solid var(--border);
+  border-radius:4px;padding:3px 9px;
+}
+
 @media(max-width:680px){
   .tl-item{grid-template-columns:1fr;padding-left:1.25rem}
   .tl-left{text-align:left;border-right:none;border-left:1px solid var(--border2);padding-right:0;padding-left:1.25rem;padding-bottom:0.5rem}
@@ -102,119 +244,199 @@ h1.hero-name strong{font-weight:500;color:#fff}
   .tl-right{padding-left:1.25rem;border-left:1px solid var(--border2)}
 }
 
-/* AI CARDS */
+/*────────────────────────────────────────
+  AI WORK — FEATURED CARDS
+────────────────────────────────────────*/
 .ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
 @media(max-width:680px){.ai-grid{grid-template-columns:1fr}}
-.ai-card{background:var(--navy3);border:1px solid var(--border);border-radius:12px;padding:1.75rem;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+
+.ai-card{
+  background:var(--navy3);border:1px solid var(--border);
+  border-radius:12px;padding:1.75rem;
+  transition:border-color .2s,transform .2s;
+  position:relative;overflow:hidden;
+}
 .ai-card:hover{border-color:var(--border2);transform:translateY(-2px)}
-.ai-card.featured{grid-column:1/-1;border-color:rgba(74,144,245,.25);background:linear-gradient(135deg,rgba(74,144,245,.05) 0%,var(--navy3) 50%)}
-.ai-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(74,144,245,.3),transparent);opacity:0;transition:opacity .2s}
+.ai-card.featured{
+  grid-column:1/-1;
+  border-color:rgba(74,144,245,.25);
+  background:linear-gradient(135deg,rgba(74,144,245,.05) 0%,var(--navy3) 50%);
+}
+.ai-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(74,144,245,.3),transparent);
+  opacity:0;transition:opacity .2s;
+}
 .ai-card:hover::before{opacity:1}
 .ai-icon{font-size:20px;margin-bottom:1rem;display:block}
 .ai-card h3{font-size:16px;font-weight:500;color:var(--text);margin-bottom:.5rem}
 .ai-card p{font-size:13px;color:var(--text2);line-height:1.75}
-.ai-meta{display:flex;align-items:center;justify-content:space-between;margin-top:1.25rem}
+.ai-meta{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:1.25rem;
+}
 .ai-stat{font-family:var(--mono);font-size:12px;color:var(--teal)}
 .ai-link{font-family:var(--mono);font-size:12px;color:var(--text3);transition:color .15s}
 .ai-link:hover{color:var(--blue2)}
 
-/* ARCHITECTURE */
+/*────────────────────────────────────────
+  ARCHITECTURE — NUMBERED LIST
+────────────────────────────────────────*/
 .arch-list{display:flex;flex-direction:column;gap:0}
-.arch-item{display:grid;grid-template-columns:60px 1fr;gap:0 1.5rem;padding:2rem 0;border-bottom:1px solid var(--border)}
+.arch-item{
+  display:grid;grid-template-columns:60px 1fr;
+  gap:0 1.5rem;
+  padding:2rem 0;
+  border-bottom:1px solid var(--border);
+}
 .arch-item:first-child{border-top:1px solid var(--border)}
-.arch-num{font-family:var(--mono);font-size:28px;font-weight:500;color:var(--border2);line-height:1;padding-top:3px;transition:color .2s}
+.arch-num{
+  font-family:var(--mono);font-size:28px;font-weight:500;
+  color:var(--border2);line-height:1;padding-top:3px;
+  transition:color .2s;
+}
 .arch-item:hover .arch-num{color:var(--blue)}
 .arch-body h3{font-size:16px;font-weight:500;color:var(--text);margin-bottom:.4rem}
 .arch-body p{font-size:14px;color:var(--text2);line-height:1.75;max-width:640px}
 .arch-pill-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:.75rem}
-.arch-pill{font-family:var(--mono);font-size:11px;color:var(--blue2);background:rgba(74,144,245,.08);border:1px solid rgba(74,144,245,.2);border-radius:4px;padding:3px 10px}
-.arch-result{font-family:var(--mono);font-size:11px;color:var(--teal);margin-top:.6rem;display:flex;align-items:center;gap:6px}
+.arch-pill{
+  font-family:var(--mono);font-size:11px;
+  color:var(--blue2);
+  background:rgba(74,144,245,.08);
+  border:1px solid rgba(74,144,245,.2);
+  border-radius:4px;padding:3px 10px;
+}
+.arch-result{
+  font-family:var(--mono);font-size:11px;color:var(--teal);
+  margin-top:.6rem;display:flex;align-items:center;gap:6px;
+}
 .arch-result::before{content:'✓';color:var(--teal)}
 
-/* TEAM FLOW GRID */
-.flow-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}
-.flow-step{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:1.75rem;transition:transform .2s,border-color .2s,box-shadow .2s}
-.flow-step:hover{transform:translateY(-4px);border-color:var(--border2);box-shadow:0 18px 50px rgba(0,0,0,.18)}
-.step-num{font-family:var(--mono);font-size:13px;color:var(--blue);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.85rem}
-.step-title{font-size:16px;font-weight:500;color:var(--text);margin-bottom:.75rem}
-.step-desc{font-size:13px;color:var(--text2);line-height:1.75}
-@media(max-width:900px){.flow-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:540px){.flow-grid{grid-template-columns:1fr}}
-
-/* PERFORMANCE REVIEWS */
-.perf-intro{font-size:15px;color:var(--text2);line-height:1.8;max-width:640px;margin-bottom:2.5rem}
-.perf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem;margin-bottom:3rem}
-.perf-card{background:var(--navy3);border:1px solid var(--border);border-radius:12px;padding:1.75rem;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}
-.perf-card:hover{border-color:var(--border2);transform:translateY(-2px)}
-.perf-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--teal));opacity:.5}
-.perf-card.highlight::before{opacity:1}
-.perf-label{font-family:var(--mono);font-size:11px;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem}
-.perf-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:.75rem}
-.perf-items{list-style:none;padding:0}
-.perf-items li{font-size:13px;color:var(--text2);line-height:1.7;padding-left:1rem;position:relative;margin-bottom:5px}
-.perf-items li::before{content:'◆';position:absolute;left:0;color:var(--teal);font-size:8px;top:5px}
-.perf-cadence{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
-.cadence-item{display:flex;align-items:center;gap:.625rem;background:var(--navy3);border:1px solid var(--border);border-radius:8px;padding:.75rem 1.125rem}
-.cadence-freq{font-family:var(--mono);font-size:13px;color:var(--blue2);font-weight:500;min-width:60px}
-.cadence-label{font-size:13px;color:var(--text2)}
-.perf-metrics-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-top:2rem}
-.perf-metric{background:var(--navy2);padding:1.25rem 1.5rem}
-.perf-metric-n{font-family:var(--mono);font-size:24px;color:var(--teal);font-weight:500;line-height:1;margin-bottom:.35rem}
-.perf-metric-l{font-size:12px;color:var(--text2)}
-
-/* SKILLS */
+/*────────────────────────────────────────
+  SKILLS
+────────────────────────────────────────*/
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
-.skill-group{background:var(--navy3);border:1px solid var(--border);border-radius:10px;padding:1.5rem}
-.skill-group-label{font-family:var(--mono);font-size:11px;color:var(--blue2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem}
+.skill-group{
+  background:var(--navy3);border:1px solid var(--border);
+  border-radius:10px;padding:1.5rem;
+}
+.skill-group-label{
+  font-family:var(--mono);font-size:11px;
+  color:var(--blue2);letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:1rem;
+}
 .skill-tags{display:flex;flex-wrap:wrap;gap:6px}
-.skill-tag{font-size:13px;color:var(--text2);background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:5px;padding:4px 12px}
+.skill-tag{
+  font-size:13px;color:var(--text2);
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border);
+  border-radius:5px;padding:4px 12px;
+}
 
-/* TEACHING */
+/*────────────────────────────────────────
+  TEACHING
+────────────────────────────────────────*/
 .teach-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
 @media(max-width:600px){.teach-row{grid-template-columns:1fr}}
-.teach-card{background:var(--navy3);border:1px solid var(--border);border-radius:10px;padding:2rem}
-.teach-num{font-family:var(--mono);font-size:48px;font-weight:500;color:var(--teal);line-height:1;margin-bottom:.5rem}
+.teach-card{
+  background:var(--navy3);border:1px solid var(--border);
+  border-radius:10px;padding:2rem;
+}
+.teach-num{
+  font-family:var(--mono);font-size:48px;font-weight:500;
+  color:var(--teal);line-height:1;margin-bottom:.5rem;
+}
 .teach-desc{font-size:14px;color:var(--text2);line-height:1.6}
+
 .resource-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
-.resource-card{background:var(--navy3);border:1px solid var(--border);border-radius:10px;padding:1.5rem;display:flex;flex-direction:column;gap:.5rem;transition:border-color .2s}
+.resource-card{
+  background:var(--navy3);border:1px solid var(--border);
+  border-radius:10px;padding:1.5rem;
+  display:flex;flex-direction:column;gap:.5rem;
+  transition:border-color .2s;
+}
 .resource-card:hover{border-color:var(--border2)}
 .resource-icon{font-size:18px}
 .resource-card h3{font-size:15px;font-weight:500;color:var(--text)}
 .resource-card p{font-size:13px;color:var(--text2);line-height:1.65;flex:1}
-.resource-link{font-family:var(--mono);font-size:11px;color:var(--blue);margin-top:.5rem;transition:color .15s;display:inline-block}
+.resource-link{
+  font-family:var(--mono);font-size:11px;
+  color:var(--blue);margin-top:.5rem;
+  transition:color .15s;display:inline-block;
+}
 .resource-link:hover{color:var(--blue2)}
 
-/* PHILOSOPHY */
+/*────────────────────────────────────────
+  PHILOSOPHY
+────────────────────────────────────────*/
 .philosophy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
-.phil-card{background:var(--navy3);border:1px solid var(--border);border-radius:10px;padding:1.75rem}
+.phil-card{
+  background:var(--navy3);border:1px solid var(--border);
+  border-radius:10px;padding:1.75rem;
+}
 .phil-q{font-size:13px;color:var(--blue2);font-family:var(--mono);margin-bottom:.75rem}
 .phil-a{font-size:14px;color:var(--text2);line-height:1.8}
 .phil-a strong{color:var(--text);font-weight:500}
 
-/* CERTS */
+/*────────────────────────────────────────
+  CERTS & AWARDS
+────────────────────────────────────────*/
 .cert-row{display:flex;flex-wrap:wrap;gap:.625rem;margin-bottom:2rem}
-.cert-badge{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text2);background:var(--navy3);border:1px solid var(--border);border-radius:6px;padding:8px 14px}
+.cert-badge{
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;color:var(--text2);
+  background:var(--navy3);border:1px solid var(--border);
+  border-radius:6px;padding:8px 14px;
+}
 .cert-badge::before{content:'⬡';color:var(--blue);font-size:11px}
+
 .award-row{display:flex;flex-wrap:wrap;gap:.625rem}
-.award-badge{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text2);background:var(--navy3);border:1px solid var(--border);border-radius:6px;padding:8px 14px}
+.award-badge{
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;color:var(--text2);
+  background:var(--navy3);border:1px solid var(--border);
+  border-radius:6px;padding:8px 14px;
+}
 .award-badge::before{content:'★';color:var(--gold);font-size:11px}
 
-/* CONTACT */
-.contact-wrap{text-align:center;max-width:560px;margin:0 auto}
+/*────────────────────────────────────────
+  CONTACT
+────────────────────────────────────────*/
+.contact-wrap{
+  text-align:center;max-width:560px;margin:0 auto;
+}
 .contact-wrap .s-title{margin-bottom:.75rem}
 .contact-wrap .s-intro{margin:0 auto 2.5rem}
 .contact-links{display:flex;justify-content:center;flex-wrap:wrap;gap:1rem}
-.contact-link{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text2);background:var(--navy3);border:1px solid var(--border);border-radius:8px;padding:12px 22px;transition:border-color .2s,color .2s}
+.contact-link{
+  display:flex;align-items:center;gap:8px;
+  font-size:14px;color:var(--text2);
+  background:var(--navy3);border:1px solid var(--border);
+  border-radius:8px;padding:12px 22px;
+  transition:border-color .2s,color .2s;
+}
 .contact-link:hover{border-color:var(--blue);color:var(--text)}
 .contact-link .ci{font-size:16px}
 
-/* FOOTER */
-footer{border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-family:var(--mono);font-size:11px;color:var(--text3)}
+/*────────────────────────────────────────
+  FOOTER
+────────────────────────────────────────*/
+footer{
+  border-top:1px solid var(--border);
+  padding:1.5rem 2.5rem;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;
+  font-family:var(--mono);font-size:11px;color:var(--text3);
+}
 
-/* SCROLL REVEAL */
+/*────────────────────────────────────────
+  SCROLL REVEAL
+────────────────────────────────────────*/
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
+/*────────────────────────────────────────
+  CUSTOM SCROLLBAR
+────────────────────────────────────────*/
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-track{background:var(--navy)}
 ::-webkit-scrollbar-thumb{background:var(--slate);border-radius:3px}
@@ -222,7 +444,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;jus
 </head>
 <body>
 
-<!-- ═══ NAV ═══ -->
+<!-- ═══════════════════════════ NAV ═══════════════════════════ -->
 <nav id="main-nav">
   <span class="nav-logo">SG.ae</span>
   <ul class="nav-links" id="nav-links">
@@ -238,20 +460,16 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;jus
   <button class="nav-burger" onclick="document.getElementById('nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
 </nav>
 
-<!-- ═══ HERO ═══ -->
+<!-- ═══════════════════════════ HERO ══════════════════════════ -->
 <section class="hero" id="top">
   <div class="hero-left">
     <p class="hero-eyebrow">Data Analytics Engineer · Team Lead</p>
     <h1 class="hero-name"><strong>Sreejanya</strong><br>Gonti</h1>
-    <p class="hero-tagline-italic">When the numbers matter, my pipelines deliver them.</p>
-    <p class="hero-tagline-story">
-      From cloud migrations to AI-powered analytics agents — I've spent my experience making enterprise data faster, cleaner, and smarter.
-      in story telling stakeholders what's happening, why it happened, and what to do next.
-      Now I lead the team that makes all of it happen at scale.
-    </p>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:2rem;font-style:italic;font-weight:600">When the numbers matter, my pipelines deliver them.</p>
+    <p class="hero-desc">From cloud migrations to AI-powered analytics agents — I've spent my experience making enterprise data faster, cleaner, and smarter. Now I lead the team that makes it happen at scale.</p>
     <div class="hero-stats">
       <div class="hstat"><span class="hstat-n">7+</span><span class="hstat-l">Years</span></div>
-      <div class="hstat"><span class="hstat-n">300+</span><span class="hstat-l">Snowflake Assets</span></div>
+      <div class="hstat"><span class="hstat-n">200+</span><span class="hstat-l">Snowflake Assets</span></div>
       <div class="hstat"><span class="hstat-n">120+</span><span class="hstat-l">Stakeholders</span></div>
       <div class="hstat"><span class="hstat-n">40+</span><span class="hstat-l">AI Users</span></div>
     </div>
@@ -265,28 +483,57 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;jus
   </div>
 </section>
 
-<!-- ═══ IMPACT ═══ -->
+<!-- ══════════════════════════ IMPACT ═════════════════════════ -->
 <section class="section" id="impact">
   <div class="section-inner">
     <p class="s-eyebrow">By the numbers</p>
     <h2 class="s-title reveal">What I've delivered</h2>
     <div class="impact-grid reveal">
-      <div class="impact-cell"><div class="impact-n">75<sup>%</sup></div><div class="impact-label">Inventory runtime reduction</div><div class="impact-sub">2 hrs → 30 min</div></div>
-      <div class="impact-cell"><div class="impact-n">99.95<sup>%</sup></div><div class="impact-label">Migration validation accuracy</div><div class="impact-sub">250+ tables migrated</div></div>
-      <div class="impact-cell"><div class="impact-n">35<sup>%</sup></div><div class="impact-label">Query performance gain</div><div class="impact-sub">Snowflake optimization</div></div>
-      <div class="impact-cell"><div class="impact-n">20<sup>+</sup></div><div class="impact-label">Hours saved per month</div><div class="impact-sub">Validation & reconciliation</div></div>
+      <div class="impact-cell">
+        <div class="impact-n">75<sup>%</sup></div>
+        <div class="impact-label">Inventory runtime reduction</div>
+        <div class="impact-sub">2 hrs → 30 min</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-n">99.95<sup>%</sup></div>
+        <div class="impact-label">Migration validation accuracy</div>
+        <div class="impact-sub">250+ tables migrated</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-n">35<sup>%</sup></div>
+        <div class="impact-label">Query performance gain</div>
+        <div class="impact-sub">Snowflake optimization</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-n">40<sup>%</sup></div>
+        <div class="impact-label">ETL runtime cut</div>
+        <div class="impact-sub">SSIS → Airflow DAGs</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-n">80<sup>%+</sup></div>
+        <div class="impact-label">DBT test coverage achieved</div>
+        <div class="impact-sub">Was near zero</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-n">20<sup>+</sup></div>
+        <div class="impact-label">Hours saved per month</div>
+        <div class="impact-sub">Validation & reconciliation</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ EXPERIENCE ═══ -->
+<!-- ══════════════════════════ EXPERIENCE ═════════════════════ -->
 <section class="section section-alt" id="experience">
   <div class="section-inner">
     <p class="s-eyebrow">Career</p>
     <h2 class="s-title reveal">Where I've built</h2>
     <div class="timeline">
+
       <div class="tl-item current reveal">
-        <div class="tl-left"><div class="tl-date">May 2025<br>Present</div></div>
+        <div class="tl-left">
+          <div class="tl-date">May 2025<br>Present</div>
+        </div>
         <div class="tl-right">
           <div class="tl-company">TechStyle Fashion Group / FableticsOS</div>
           <div class="tl-role">Data Analytics Engineer — Team Lead</div>
@@ -298,11 +545,16 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;jus
             <li>Serve as Analytics Engineering owner for Blue Yonder planning integrations (50+ planners), cutting issue resolution time ~35%</li>
             <li>Established validation, reconciliation, monitoring, and discrepancy-detection frameworks — 20+ hrs/month saved</li>
           </ul>
-          <div class="tl-tags"><span>Snowflake Intelligence</span><span>DBT</span><span>Blue Yonder</span><span>AI Agents</span><span>Airflow</span><span>Team Lead</span></div>
+          <div class="tl-tags">
+            <span>Snowflake Intelligence</span><span>DBT</span><span>Blue Yonder</span><span>AI Agents</span><span>Airflow</span><span>Team Lead</span>
+          </div>
         </div>
       </div>
+
       <div class="tl-item reveal">
-        <div class="tl-left"><div class="tl-date">Jun 2024<br>May 2025</div></div>
+        <div class="tl-left">
+          <div class="tl-date">Jun 2024<br>May 2025</div>
+        </div>
         <div class="tl-right">
           <div class="tl-company">Skill On Tap LLC</div>
           <div class="tl-role">Data Analytics Engineer · Client: TechStyle Fashion Group</div>
@@ -315,8 +567,11 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;jus
           <div class="tl-tags"><span>DBT</span><span>Snowflake</span><span>Tableau</span><span>AWS</span></div>
         </div>
       </div>
+
       <div class="tl-item reveal">
-        <div class="tl-left"><div class="tl-date">Aug 2019<br>May 2024</div></div>
+        <div class="tl-left">
+          <div class="tl-date">Aug 2019<br>May 2024</div>
+        </div>
         <div class="tl-right">
           <div class="tl-company">Innova Solutions</div>
           <div class="tl-role">Data Engineer / Cloud ETL Engineer</div>
@@ -329,44 +584,57 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;jus
           <div class="tl-tags"><span>Snowflake</span><span>Airflow</span><span>Snowpipe</span><span>Python</span><span>SSIS</span></div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- ═══ AI ═══ -->
+<!-- ═════════════════════════════ AI ══════════════════════════ -->
 <section class="section" id="ai">
   <div class="section-inner">
     <p class="s-eyebrow">AI Work</p>
     <h2 class="s-title reveal">AI I've designed &amp; shipped</h2>
     <div class="ai-grid reveal">
+
       <div class="ai-card featured">
         <span class="ai-icon">⬡</span>
         <h3>Snowflake Intelligence Merchant Agent</h3>
         <p>Conversational analytics agent for merchant workflows. Business users ask natural-language questions — the agent queries governed Snowflake semantic models and returns trusted answers. Adopted by 40+ users across planning, merchandising, and finance.</p>
-        <div class="ai-meta"><span class="ai-stat">40+ users · ~15–20 hrs/week saved</span><span class="ai-link">Agent architecture ↓</span></div>
+        <div class="ai-meta">
+          <span class="ai-stat">40+ users · ~15–20 hrs/week saved</span>
+          <span class="ai-link">Agent architecture ↓</span>
+        </div>
       </div>
+
       <div class="ai-card">
         <span class="ai-icon">⚙</span>
         <h3>Analytics Engineering AI Skills</h3>
         <p>Custom AI specifications — structured context packs that make an AI assistant behave like a senior analytics engineer. Covers SQL review, model design, incident response, and stakeholder translation.</p>
-        <div class="ai-meta"><span class="ai-stat">Used by 5-person team daily</span></div>
+        <div class="ai-meta">
+          <span class="ai-stat">Used by 5-person team daily</span>
+        </div>
       </div>
+
       <div class="ai-card">
         <span class="ai-icon">🎫</span>
         <h3>AI-Assisted Jira Ticket Formatter</h3>
         <p>Takes a Slack message or verbal description and produces a structured Jira ticket — right-sized epic, acceptance criteria, validation checklist, and business impact — using custom prompt templates.</p>
-        <div class="ai-meta"><span class="ai-stat">Sprint planning · reduced rework</span></div>
+        <div class="ai-meta">
+          <span class="ai-stat">Sprint planning · reduced rework</span>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- ═══ ARCHITECTURE ═══ -->
+<!-- ══════════════════════════ ARCHITECTURE ═══════════════════ -->
 <section class="section section-alt" id="architecture">
   <div class="section-inner">
     <p class="s-eyebrow">Systems Design</p>
     <h2 class="s-title reveal">Architecture &amp; frameworks I've built</h2>
     <div class="arch-list">
+
       <div class="arch-item reveal">
         <div class="arch-num">01</div>
         <div class="arch-body">
@@ -376,6 +644,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;jus
           <div class="arch-result">99.95% accuracy on 250-table SQL Server → Snowflake migration</div>
         </div>
       </div>
+
       <div class="arch-item reveal">
         <div class="arch-num">02</div>
         <div class="arch-body">
@@ -385,6 +654,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;jus
           <div class="arch-result">40+ users, 3-phase rollout: pilot → expansion → full</div>
         </div>
       </div>
+
       <div class="arch-item reveal">
         <div class="arch-num">03</div>
         <div class="arch-body">
@@ -394,6 +664,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;jus
           <div class="arch-result">Inventory runtime cut 75%. Data latency hours → minutes.</div>
         </div>
       </div>
+
       <div class="arch-item reveal">
         <div class="arch-num">04</div>
         <div class="arch-body">
@@ -403,6 +674,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;jus
           <div class="arch-result">35% query performance improvement. ETL runtime −40%.</div>
         </div>
       </div>
+
       <div class="arch-item reveal">
         <div class="arch-num">05</div>
         <div class="arch-body">
@@ -412,141 +684,212 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;jus
           <div class="arch-result">Raised team's DBT test coverage 0% → 80%+</div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- ═══ TEAM FLOW ═══ -->
+<!-- ══════════════════════════ TEAM FLOW ═════════════════════════ -->
 <section class="section" id="teamflow">
   <div class="section-inner">
     <p class="s-eyebrow">Team Leadership</p>
     <h2 class="s-title reveal">How I run the delivery process</h2>
     <p class="s-intro reveal">A structured team workflow from sprint planning through deployment, with clear priorities, review checkpoints, and stakeholder communication built in.</p>
     <div class="flow-grid reveal">
-      <div class="flow-step"><div class="step-num">01</div><div class="step-title">Sprint Planning</div><div class="step-desc">Set goals, align with stakeholders, define outcomes, and break work into clear delivery increments.</div></div>
-      <div class="flow-step"><div class="step-num">02</div><div class="step-title">Create Tickets</div><div class="step-desc">Translate outcomes into well-scoped Jira stories with acceptance criteria, data contracts, and validation checks.</div></div>
-      <div class="flow-step"><div class="step-num">03</div><div class="step-title">Assign &amp; Prioritize</div><div class="step-desc">Allocate work by skill, urgency, and impact while balancing team capacity and dependency risk.</div></div>
-      <div class="flow-step"><div class="step-num">04</div><div class="step-title">Technical Templates</div><div class="step-desc">Use templates for model design, SQL patterns, testing, and data validation so every engineer ships consistent production code.</div></div>
-      <div class="flow-step"><div class="step-num">05</div><div class="step-title">Development</div><div class="step-desc">Build with repeatable patterns, reusable semantic models, and frequent reviews to keep code quality high.</div></div>
-      <div class="flow-step"><div class="step-num">06</div><div class="step-title">Review &amp; Validate</div><div class="step-desc">Perform peer reviews, automated tests, and data validation checks before moving to release readiness.</div></div>
-      <div class="flow-step"><div class="step-num">07</div><div class="step-title">Deploy to Prod</div><div class="step-desc">Coordinate releases with deploy pipelines, monitor rollouts, and ensure production readiness with rollback support.</div></div>
-      <div class="flow-step"><div class="step-num">08</div><div class="step-title">Stakeholder Communication</div><div class="step-desc">Share status, risks, and outcomes clearly so business users trust the data and know when to act.</div></div>
-    </div>
-
-    <!-- PERFORMANCE REVIEWS -->
-    <div style="margin-top:5rem">
-      <p class="s-eyebrow">Performance Reviews</p>
-      <h2 class="s-title reveal">How I grow my team</h2>
-      <p class="perf-intro reveal">Performance reviews aren't a once-a-year checkbox. I run a continuous feedback system that combines structured reviews with weekly 1:1s, so engineers always know where they stand and what's next for them.</p>
-
-      <div class="perf-grid reveal">
-        <div class="perf-card highlight">
-          <div class="perf-label">Technical Growth</div>
-          <div class="perf-title">Engineering Excellence</div>
-          <ul class="perf-items">
-            <li>Code quality, SQL standards, and DBT best practices</li>
-            <li>Test coverage ownership and data quality mindset</li>
-            <li>Architecture thinking — can they design, not just build?</li>
-            <li>Debugging depth — how fast and how deep?</li>
-            <li>Documentation habits and knowledge sharing</li>
-          </ul>
-        </div>
-        <div class="perf-card highlight">
-          <div class="perf-label">Delivery & Ownership</div>
-          <div class="perf-title">Impact & Reliability</div>
-          <ul class="perf-items">
-            <li>Sprint commitment vs. delivery rate</li>
-            <li>Proactive blocker escalation vs. waiting</li>
-            <li>Production support response and on-call ownership</li>
-            <li>Cross-team collaboration and stakeholder communication</li>
-            <li>Business impact of shipped work — do they connect code to outcomes?</li>
-          </ul>
-        </div>
-        <div class="perf-card highlight">
-          <div class="perf-label">Growth Trajectory</div>
-          <div class="perf-title">Leadership & Mindset</div>
-          <ul class="perf-items">
-            <li>Coachability — do they take feedback and apply it?</li>
-            <li>Initiative — do they spot problems before being told?</li>
-            <li>Mentorship of peers and knowledge transfer</li>
-            <li>Scope expansion — are they ready for the next level?</li>
-            <li>AI tools adoption and efficiency mindset</li>
-          </ul>
-        </div>
+      <div class="flow-step">
+        <div class="step-num">01</div>
+        <div class="step-title">Sprint Planning</div>
+        <div class="step-desc">Set goals, align with stakeholders, define outcomes, and break work into clear delivery increments.</div>
       </div>
-
-      <div style="margin-bottom:1.5rem">
-        <p style="font-family:var(--mono);font-size:11px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem">Review Cadence</p>
-        <div class="perf-cadence reveal">
-          <div class="cadence-item"><span class="cadence-freq">Weekly</span><span class="cadence-label">1:1s — blockers, priorities, and real-time feedback</span></div>
-          <div class="cadence-item"><span class="cadence-freq">Monthly</span><span class="cadence-label">Pulse check — momentum, morale, and growth gaps</span></div>
-          <div class="cadence-item"><span class="cadence-freq">Quarterly</span><span class="cadence-label">Formal review — scored across all three pillars with written feedback</span></div>
-          <div class="cadence-item"><span class="cadence-freq">Annually</span><span class="cadence-label">Career conversation — goals, level progression, and next chapter</span></div>
-        </div>
+      <div class="flow-step">
+        <div class="step-num">02</div>
+        <div class="step-title">Create Tickets</div>
+        <div class="step-desc">Translate outcomes into well-scoped Jira stories with acceptance criteria, data contracts, and validation checks.</div>
       </div>
-
-      <div class="perf-metrics-row reveal">
-        <div class="perf-metric"><div class="perf-metric-n">5</div><div class="perf-metric-l">Engineers reviewed</div></div>
-        <div class="perf-metric"><div class="perf-metric-n">80%+</div><div class="perf-metric-l">DBT test coverage achieved under my lead</div></div>
-        <div class="perf-metric"><div class="perf-metric-n">0</div><div class="perf-metric-l">Surprise attrition — people know where they stand</div></div>
-        <div class="perf-metric"><div class="perf-metric-n">3</div><div class="perf-metric-l">Engineers promoted or scope-expanded in last year</div></div>
+      <div class="flow-step">
+        <div class="step-num">03</div>
+        <div class="step-title">Assign & Prioritize</div>
+        <div class="step-desc">Allocate work by skill, urgency, and impact while balancing team capacity and dependency risk.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">04</div>
+        <div class="step-title">Technical Templates</div>
+        <div class="step-desc">Use templates for model design, SQL patterns, testing, and data validation so every engineer ships consistent production code.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">05</div>
+        <div class="step-title">Development</div>
+        <div class="step-desc">Build with repeatable patterns, reusable semantic models, and frequent reviews to keep code quality high.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">06</div>
+        <div class="step-title">Review & Validate</div>
+        <div class="step-desc">Perform peer reviews, automated tests, and data validation checks before moving to release readiness.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">07</div>
+        <div class="step-title">Deploy to Prod</div>
+        <div class="step-desc">Coordinate releases with deploy pipelines, monitor rollouts, and ensure production readiness with rollback support.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">08</div>
+        <div class="step-title">Stakeholder Communication</div>
+        <div class="step-desc">Share status, risks, and outcomes clearly so business users trust the data and know when to act.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ SKILLS ═══ -->
-<section class="section section-alt" id="skills">
+<!-- ══════════════════════════ SKILLS ═════════════════════════ -->
+<section class="section" id="skills">
   <div class="section-inner">
     <p class="s-eyebrow">Technical Skills</p>
     <h2 class="s-title reveal">Core stack</h2>
     <div class="skills-grid reveal">
-      <div class="skill-group"><div class="skill-group-label">Analytics &amp; BI</div><div class="skill-tags"><span class="skill-tag">Snowflake</span><span class="skill-tag">DBT</span><span class="skill-tag">SQL</span><span class="skill-tag">Tableau</span><span class="skill-tag">Data Modeling</span><span class="skill-tag">Semantic Models</span><span class="skill-tag">Metrics Layer</span></div></div>
-      <div class="skill-group"><div class="skill-group-label">Data Engineering</div><div class="skill-tags"><span class="skill-tag">Airflow</span><span class="skill-tag">Snowpipe</span><span class="skill-tag">ETL / ELT</span><span class="skill-tag">CDC Frameworks</span><span class="skill-tag">Matillion</span><span class="skill-tag">SSIS</span><span class="skill-tag">DataStage</span></div></div>
-      <div class="skill-group"><div class="skill-group-label">Cloud Platforms</div><div class="skill-tags"><span class="skill-tag">AWS</span><span class="skill-tag">Azure Databricks</span><span class="skill-tag">Azure Data Factory</span><span class="skill-tag">Azure Data Lake</span><span class="skill-tag">Azure SQL</span></div></div>
-      <div class="skill-group"><div class="skill-group-label">AI &amp; Programming</div><div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">PySpark</span><span class="skill-tag">Scikit-Learn</span><span class="skill-tag">Snowflake Intelligence</span><span class="skill-tag">AI Agents</span><span class="skill-tag">Streamlit</span></div></div>
-      <div class="skill-group"><div class="skill-group-label">Governance &amp; Quality</div><div class="skill-tags"><span class="skill-tag">Data Quality</span><span class="skill-tag">Validation Frameworks</span><span class="skill-tag">Reconciliation</span><span class="skill-tag">Monitoring</span><span class="skill-tag">Root Cause Analysis</span></div></div>
-      <div class="skill-group"><div class="skill-group-label">Delivery</div><div class="skill-tags"><span class="skill-tag">Git</span><span class="skill-tag">Azure DevOps</span><span class="skill-tag">Jira</span><span class="skill-tag">Agile / Scrum</span><span class="skill-tag">Team Mentorship</span></div></div>
+      <div class="skill-group">
+        <div class="skill-group-label">Analytics &amp; BI</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Snowflake</span>
+          <span class="skill-tag">DBT</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Tableau</span>
+          <span class="skill-tag">Data Modeling</span>
+          <span class="skill-tag">Semantic Models</span>
+          <span class="skill-tag">Metrics Layer</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Data Engineering</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Airflow</span>
+          <span class="skill-tag">Snowpipe</span>
+          <span class="skill-tag">ETL / ELT</span>
+          <span class="skill-tag">CDC Frameworks</span>
+          <span class="skill-tag">Matillion</span>
+          <span class="skill-tag">SSIS</span>
+          <span class="skill-tag">DataStage</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Cloud Platforms</div>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">Azure Databricks</span>
+          <span class="skill-tag">Azure Data Factory</span>
+          <span class="skill-tag">Azure Data Lake</span>
+          <span class="skill-tag">Azure SQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">AI &amp; Programming</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">PySpark</span>
+          <span class="skill-tag">Scikit-Learn</span>
+          <span class="skill-tag">Snowflake Intelligence</span>
+          <span class="skill-tag">AI Agents</span>
+          <span class="skill-tag">Streamlit</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Governance &amp; Quality</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Data Quality</span>
+          <span class="skill-tag">Validation Frameworks</span>
+          <span class="skill-tag">Reconciliation</span>
+          <span class="skill-tag">Monitoring</span>
+          <span class="skill-tag">Root Cause Analysis</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Delivery</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Azure DevOps</span>
+          <span class="skill-tag">Jira</span>
+          <span class="skill-tag">Agile / Scrum</span>
+          <span class="skill-tag">Team Mentorship</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ TEACHING ═══ -->
-<section class="section" id="teaching">
+<!-- ══════════════════════════ TEACHING ═══════════════════════ -->
+<section class="section section-alt" id="teaching">
   <div class="section-inner">
     <p class="s-eyebrow">Teaching &amp; Community</p>
     <h2 class="s-title reveal">Sharing what I know</h2>
     <div class="teach-row reveal">
-      <div class="teach-card"><div class="teach-num">100+</div><div class="teach-desc">People trained on Snowflake, PySpark, and Spark — from fundamentals to production patterns</div></div>
-      <div class="teach-card"><div class="teach-num">100+</div><div class="teach-desc">Snowflake interviews conducted — know the patterns that separate surface knowledge from production depth</div></div>
+      <div class="teach-card">
+        <div class="teach-num">100+</div>
+        <div class="teach-desc">People trained on Snowflake, PySpark, and Spark — from fundamentals to production patterns</div>
+      </div>
+      <div class="teach-card">
+        <div class="teach-num">100+</div>
+        <div class="teach-desc">Snowflake interviews conducted — know the patterns that separate surface knowledge from production depth</div>
+      </div>
     </div>
     <div class="resource-grid reveal">
-      <div class="resource-card"><span class="resource-icon">📖</span><h3>Snowflake Helping Guide</h3><p>The reference I built for onboarding engineers — mental models, common pitfalls, window function patterns, DBT concepts explained simply.</p><span class="resource-link">docs/snowflake-guide/ →</span></div>
-      <div class="resource-card"><span class="resource-icon">🎯</span><h3>Interview Playbook</h3><p>What I look for when evaluating Snowflake candidates — questions that separate surface knowledge from real production experience.</p><span class="resource-link">docs/interview-playbook/ →</span></div>
-      <div class="resource-card"><span class="resource-icon">🗂</span><h3>Jira Framework for AE Teams</h3><p>Epic structure, story templates, and priority guide for analytics engineering teams. Includes AI-assisted ticket writing workflow.</p><span class="resource-link">docs/jira-framework/ →</span></div>
+      <div class="resource-card">
+        <span class="resource-icon">📖</span>
+        <h3>Snowflake Helping Guide</h3>
+        <p>The reference I built for onboarding engineers — mental models, common pitfalls, window function patterns, DBT concepts explained simply.</p>
+        <span class="resource-link">docs/snowflake-guide/ →</span>
+      </div>
+      <div class="resource-card">
+        <span class="resource-icon">🎯</span>
+        <h3>Interview Playbook</h3>
+        <p>What I look for when evaluating Snowflake candidates — questions that separate surface knowledge from real production experience, and what good answers sound like.</p>
+        <span class="resource-link">docs/interview-playbook/ →</span>
+      </div>
+      <div class="resource-card">
+        <span class="resource-icon">🗂</span>
+        <h3>Jira Framework for AE Teams</h3>
+        <p>Epic structure, story templates, and priority guide for analytics engineering teams. Includes AI-assisted ticket writing workflow.</p>
+        <span class="resource-link">docs/jira-framework/ →</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ PHILOSOPHY ═══ -->
-<section class="section section-alt" id="philosophy">
+<!-- ══════════════════════════ PHILOSOPHY ═════════════════════ -->
+<section class="section" id="philosophy">
   <div class="section-inner">
     <p class="s-eyebrow">How I work</p>
     <h2 class="s-title reveal">My professional architecture</h2>
     <p class="s-intro reveal">The mental models that show up in how I actually approach problems, lead teams, and ship things.</p>
     <div class="philosophy-grid reveal">
-      <div class="phil-card"><div class="phil-q">Before writing any code, I ask:</div><div class="phil-a"><strong>What decision does this enable?</strong> If I can't name the business decision this supports, I go back and ask. Code without a decision context is often wasted effort.</div></div>
-      <div class="phil-card"><div class="phil-q">On data quality:</div><div class="phil-a">Data quality is not a data engineering problem. It's a <strong>trust problem.</strong> If stakeholders don't trust the data, they build shadow spreadsheets — and the pipeline becomes irrelevant.</div></div>
-      <div class="phil-card"><div class="phil-q">On communicating with stakeholders:</div><div class="phil-a"><strong>30-second version first, details on request.</strong> They want to know: is the data right? When is it ready? What do they need to do? I answer those three, then stop.</div></div>
-      <div class="phil-card"><div class="phil-q">On leading a team:</div><div class="phil-a">I optimize for <strong>clarity over activity.</strong> A team that knows exactly what they're building and why ships faster than a busy team that's unclear. My job is to remove ambiguity.</div></div>
-      <div class="phil-card"><div class="phil-q">On architecture decisions:</div><div class="phil-a">"What's the simplest thing that works at the scale we <strong>actually have</strong>, and what's the first sign we'd need to revisit it?" I put a monitoring tripwire there.</div></div>
-      <div class="phil-card"><div class="phil-q">From every production incident:</div><div class="phil-a"><strong>Assumptions that went untested are where production breaks.</strong> My rule: if I catch myself saying "this will definitely work," I write a test for it.</div></div>
+      <div class="phil-card">
+        <div class="phil-q">Before writing any code, I ask:</div>
+        <div class="phil-a"><strong>What decision does this enable?</strong> If I can't name the business decision this supports, I go back and ask. Code without a decision context is often wasted effort.</div>
+      </div>
+      <div class="phil-card">
+        <div class="phil-q">On data quality:</div>
+        <div class="phil-a">Data quality is not a data engineering problem. It's a <strong>trust problem.</strong> If stakeholders don't trust the data, they build shadow spreadsheets — and the pipeline becomes irrelevant.</div>
+      </div>
+      <div class="phil-card">
+        <div class="phil-q">On communicating with stakeholders:</div>
+        <div class="phil-a"><strong>30-second version first, details on request.</strong> They want to know: is the data right? When is it ready? What do they need to do? I answer those three, then stop.</div>
+      </div>
+      <div class="phil-card">
+        <div class="phil-q">On leading a team:</div>
+        <div class="phil-a">I optimize for <strong>clarity over activity.</strong> A team that knows exactly what they're building and why ships faster than a busy team that's unclear. My job is to remove ambiguity.</div>
+      </div>
+      <div class="phil-card">
+        <div class="phil-q">On architecture decisions:</div>
+        <div class="phil-a">"What's the simplest thing that works at the scale we <strong>actually have</strong>, and what's the first sign we'd need to revisit it?" I put a monitoring tripwire there.</div>
+      </div>
+      <div class="phil-card">
+        <div class="phil-q">From every production incident:</div>
+        <div class="phil-a"><strong>Assumptions that went untested are where production breaks.</strong> My rule: if I catch myself saying "this will definitely work," I write a test for it.</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ CERTS ═══ -->
-<section class="section" id="certs">
+<!-- ══════════════════════════ CERTS ══════════════════════════ -->
+<section class="section section-alt" id="certs">
   <div class="section-inner">
     <p class="s-eyebrow">Credentials</p>
     <h2 class="s-title reveal">Certifications &amp; recognition</h2>
@@ -579,8 +922,8 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;jus
   </div>
 </section>
 
-<!-- ═══ CONTACT ═══ -->
-<section class="section section-alt" id="contact">
+<!-- ══════════════════════════ CONTACT ════════════════════════ -->
+<section class="section" id="contact">
   <div class="section-inner">
     <div class="contact-wrap">
       <p class="s-eyebrow" style="justify-content:center;display:flex">Let's connect</p>
